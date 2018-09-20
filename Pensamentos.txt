@@ -1,0 +1,30 @@
+    Primeiramente serão lidos todos os dados dos cliente e serão organizados em uma fila 
+ordenada pelo tempo de chegada em ordem crescente.
+
+    A função principal simula a passagem do tempo, com cada iteração de um loop "for" repre-
+sentando a passagem de uma unidade de tempo.
+        for(int tempo=0; ; tempo++){
+                .
+                .
+                .
+        }
+
+    Em cada unidade de tempo podem ocorrer as seguintes ações:
+        -Uma(s) pessoa(s) chega(m) a clinica pois já está no seu tempo de chegada, ou seja,
+        saem da primeira Fila, e entram em alguma fila dos guichês
+
+        -Uma pessoa sai de um guicê pois já terminou de ser atendida
+
+        -Uma pessoa começa a ser atendida em um guichê que atenda sua necessidade
+
+    Como as pessoas podem apenas ser atendidas em um guichê especifico, serão necessárias 5 filas,
+uma para cada tipo de atendimento. Após o(s) cliente(s) entrarem na clínica (saírem da primeira fila
+que reprensenta o tempo de chegada), são alocadas em uma das 5 filas dos guichês e nesse momento são 
+organizadas pela sua prioridade. Quem tem mais prioridade vem na frente. Mesma prioridade é atendido 
+quem chegou primeiro.
+
+    Com isso, é possivel armazenar todos os tempos de espera de cada pessoa em cada fila, bem como seu
+tempo de saida, a quantidade de pessoas dentro da clinica (tendo o tamanho das filas dos guichês), horários
+de pico (tendo um tempo em que a quantidade de pessoas dentro da clinica foi máxima). tempo de espera médio
+de cada guichê (dividindo a quantidade de clientes atendidos em um guicê pela soma dos tempos de espera dos 
+clientes atendidos nesse guichê). 
