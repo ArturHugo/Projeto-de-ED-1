@@ -1,6 +1,17 @@
 #ifndef Header
 #define Header
 
+typedef struct Lista{
+    struct Lista* prox;
+    void* info;
+}Lista;
+
+typedef struct Fila{
+    Lista* Head;
+    Lista* Tail;
+    int tamanho;
+}Fila;
+
 typedef struct Pessoa{
     int tempo_chegada;
     int idade;
@@ -14,6 +25,14 @@ typedef struct Pessoa{
     //  int guiche; 
 }Cliente;
 
+Fila* LeDados(char *Filename);
+
+Fila* CriaFiladeCliente();
+void InsereCliente(Fila* f, Cliente* C);
+Cliente* TiraCliente(Fila *f);
+int FVazia(Fila* f);
+Cliente* CriaCliente();
+void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond);
 
 
 
