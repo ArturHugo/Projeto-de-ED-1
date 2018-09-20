@@ -3,6 +3,7 @@
 
 typedef struct Lista{
     struct Lista* prox;
+    struct Lista* ant;
     void* info;
 }Lista;
 
@@ -14,16 +15,25 @@ typedef struct Fila{
 
 typedef struct Pessoa{
     int tempo_chegada;
-    int idade;
-    int serv; //Serviço desejado pelo Cliente
-    int cond; //Condição física do Cliente
+    //int idade;
+    int serv;   //Serviço desejado pelo Cliente
+    //int cond; //Condição física do Cliente
 
     //Faltam algumas caracteristicas
     //Exemplo:
-    //  int tempo_espera;
-    //  int prioridade;
-    //  int guiche; 
+    int tempo_espera;
+    int prioridade;
+    int guiche; 
 }Cliente;
+
+typedef struct InformacaoGlobal{
+    
+}InfoGlobal;
+
+typedef struct Guiche{
+    int serv;
+    int num;
+}Guiche;
 
 Fila* LeDados(char *Filename);
 

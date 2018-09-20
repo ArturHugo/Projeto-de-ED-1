@@ -12,7 +12,11 @@ Cliente* CriaCliente(){
 }
 void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond){
     C->tempo_chegada=tempo_chegada;
-    C->idade=idade;
     C->serv=serv;
-    C->cond=0;
+    C->prioridade=0;
+    if(idade<65)C->prioridade+=1;
+    else if(idade>65&&idade<80)C->prioridade+=2;
+    else C->prioridade+=3;
+    if(cond==0 || cond==1)C->prioridade+=2;
+    else C->prioridade+=1;
 }

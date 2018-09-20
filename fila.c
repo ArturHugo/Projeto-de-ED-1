@@ -2,6 +2,7 @@
 #include <stdlib.h> //Malloc() e free()
 #include "headers.h"
 
+/* Inicializa a Fila dos Clientes, usando uma célula cabeça */
 Fila* CriaFiladeCliente(){
     Fila* f;
     f=(Fila*)malloc(sizeof(Fila));
