@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "headers.h"
-
+/*
 Fila* LeDados(char *Filename){
     Fila* ClientesF;
     Cliente *Novo_Cliente;
@@ -21,4 +21,4 @@ Fila* LeDados(char *Filename){
         InsereCliente(ClientesF,Novo_Cliente);
     }
     return ClientesF;
-}
+}*/

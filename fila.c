@@ -3,7 +3,7 @@
 #include "headers.h"
 
 /* Inicializa a Fila dos Clientes, usando uma célula cabeça */
-Fila* CriaFiladeCliente(){
+Fila* CriaFilaVazia(){
     Fila* f;
     f=(Fila*)malloc(sizeof(Fila));
     if(f==NULL)exit(1);
@@ -12,7 +12,15 @@ Fila* CriaFiladeCliente(){
     f->tamanho=0;
     return f;
 }
-
+void InsereClienteOuGuiche(Fila* f, void* elemento, char* clienteOuGuiche){
+    f->Tail->prox=(Lista*)malloc(sizeof(Lista));
+    if(clienteOuGuiche=="cliente")
+        f->Tail->prox->info=elemento;
+    else if(clienteOuGuiche=="guiche")
+        f->Tail->prox->info=(Guiche*)elemento;
+    f->Tail=f->Tail->prox;
+    f->tamanho++;
+}
 void InsereCliente(Fila* f, Cliente* C){
     f->Tail->prox=(Lista*)malloc(sizeof(Lista));;
     f->Tail->prox->info=(Cliente*)C;
