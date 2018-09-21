@@ -12,12 +12,10 @@ Fila* CriaFilaVazia(){
     f->tamanho=0;
     return f;
 }
-void InsereClienteOuGuiche(Fila* f, void* elemento, char* clienteOuGuiche){
+void InserirNaFila(Fila* f, void* elemento){
     f->Tail->prox=(Lista*)malloc(sizeof(Lista));
-    if(clienteOuGuiche=="cliente")
-        f->Tail->prox->info=elemento;
-    else if(clienteOuGuiche=="guiche")
-        f->Tail->prox->info=(Guiche*)elemento;
+    f->Tail->prox->info=elemento;
+    f->Tail->prox->info=elemento;
     f->Tail=f->Tail->prox;
     f->tamanho++;
 }

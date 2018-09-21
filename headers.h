@@ -38,6 +38,8 @@ typedef struct Guiche{
 
 Fila* LeDados(char *Filename);
 
+void InserirNaFila(Fila* f, void* elemento);
+
 Fila* CriaFilaVazia();
 void InsereCliente(Fila* f, Cliente* C);
 Cliente* TiraCliente(Fila *f);
