@@ -1,7 +1,9 @@
-.vscode/
-a.out
-clientes.o
-fila.o
+Clientes.txt
+Fila.o
 inout.o
 main.o
+fila.o
+.vscode/
+clientes.o
+a.out
 saida.txt
