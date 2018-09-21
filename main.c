@@ -3,6 +3,6 @@
 
 int main(){
 
-
+    TeladeCriacao();
     return 0;
 }
