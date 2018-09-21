@@ -1,1 +1,7 @@
 .vscode/
+a.out
+clientes.o
+fila.o
+inout.o
+main.o
+saida.txt
