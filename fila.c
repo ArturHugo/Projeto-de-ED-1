@@ -37,8 +37,8 @@ void* TiraElementoDaFila(Fila* f){
     Lista* aux;
     void* Retorno;
     aux=f->Head;
+    Retorno=f->Head->info;
     f->Head=aux->prox;
-    Retorno = f->Head->info;
     free(aux);
     f->tamanho--;
     return Retorno;
@@ -56,4 +56,5 @@ void FreeFila(Fila* f){
         TiraElementoDaFila(f);
     }
     free(f->Head);
+    free(f);
 }
