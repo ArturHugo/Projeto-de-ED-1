@@ -14,7 +14,7 @@ void InicRandom(){
     srand((unsigned)time(&Tempo_do_computador));
 }
 /* Leitura de dados dos Clientes, devolvendo uma fila com os detalhes */
-Fila* LeDados(char *Filename){
+Fila* LeDadosClientes(char *Filename){
     Fila* ClientesF;
     Cliente *Novo_Cliente;
     FILE* f=fopen(Filename, "r");
@@ -35,6 +35,29 @@ Fila* LeDados(char *Filename){
     return ClientesF;
 }
 
+Fila* LeDadosGuiches(char *Filename){
+    Guiche* Atendimento;
+    FILE* Entrada;
+    Fila* FilaDosGuiches;
+    
+    Entrada = fopen(Filename,"r");
+    if(Entrada==NULL){
+        printf("Erro na leitura do arquivo... Parando...\n");
+        exit(1);
+    }
+    int ServGuiche;
+    int NumeroDoGuiche=1;
+    FilaDosGuiches=CriaFilaVazia();
+
+    while(fscanf(Entrada,"%d",&ServGuiche) != EOF){
+        Atendimento=(Guiche*)malloc(sizeof(Guiche));
+        Atendimento->serv=ServGuiche;
+        Atendimento->num=NumeroDoGuiche;
+        InserirNaFila(FilaDosGuiches, Atendimento);
+        NumeroDoGuiche++;
+    }
+    return FilaDosGuiches;
+}
 /* Adiciona no arquivo de saida dados aleatorios dos clientes */
 void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
     FILE* f;
