@@ -13,6 +13,7 @@ void InicRandom(){
     time_t Tempo_do_computador;
     srand((unsigned)time(&Tempo_do_computador));
 }
+/* Leitura de dados dos Clientes, devolvendo uma fila com os detalhes */
 Fila* LeDados(char *Filename){
     Fila* ClientesF;
     Cliente *Novo_Cliente;
@@ -34,6 +35,7 @@ Fila* LeDados(char *Filename){
     return ClientesF;
 }
 
+/* Adiciona no arquivo de saida dados aleatorios dos clientes */
 void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
     FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
@@ -58,6 +60,7 @@ void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
     fclose(f);
 }
 
+/* Adiciona na arquivo de saida clientes com horario de entrada fixo e outros dados aleatorios*/
 void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario){
      FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
@@ -82,6 +85,7 @@ void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario){
     fclose(f);
 }
 
+/* Adiciona na arquivo de saida clientes com Guichê fixo e outros dados aleatorios*/
 void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv){
     FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
@@ -104,6 +108,8 @@ void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv){
 
     fclose(f);
 }
+
+/* Adiciona no arquivo de Saida numeros dos guichês aleatoriamente */
 void GeraGuiches(char* ArquivoSaida, int quantidade){
     FILE* f=fopen(ArquivoSaida, "a");
         if(f==NULL){
@@ -128,6 +134,7 @@ void GeraGuiches(char* ArquivoSaida, int quantidade){
     printf("Criação feita com sucesso\n");
 }
 
+/* Cria interatividade pelo terminal para criação de arquivos de saida */
 void TeladeCriacao(){
     FILE *Exclui_Arquivo;
     char *clientefile = "Clientes.txt";
