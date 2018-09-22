@@ -35,12 +35,17 @@ typedef struct Guiche{
     int serv;              //Servico do guiche
     int num;               //Numero do guiche
 }Guiche;
+/* Funções de entrada e saida de dados */
+    int AleatorioRange(int minimo, int maximo);                                     //Retorna um numero aleatorio entre valor minimo e maximo
+    Fila* LeDados(char *Filename);                                                  //Lê os dados dos CLIENTES e retorna uma fila sem organização
+        /* Cria Arquivos Com Dados de clientes */
+    void GeraAleatoriosClientes(char* ArquivoSaida, int quantiadade);               //Coloca dados de uma quantidade de clientes com caracteristicas aleatorias  
+    void GeraClientes_Horario(char* ArquivoSaida, int quantiadade, int horario);    //Coloca dados de clientes com horario especifico de entrada
+    void GeraClientes_Guiche(char* ArquivoSaida, int quantiadade, int serv);        //Coloca dados de clientes com Serviço especifico
+    void TeladeCriacao();
+/* Fim das funções de entrada e saida */
 
-Fila* LeDados(char *Filename);
-
-void InserirNaFila(Fila* f, void* elemento);
-
-Fila* CriaFilaVazia();
+Fila* CriaFiladeCliente();
 void InsereCliente(Fila* f, Cliente* C);
 Cliente* TiraCliente(Fila *f);
 int FVazia(Fila* f);
