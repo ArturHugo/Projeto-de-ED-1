@@ -46,6 +46,7 @@ typedef struct Guiche{
 /* Fim das funções de entrada e saida */
 
 Fila* CriaFiladeCliente();
+void FreeFila(Fila* f);
 void InsereCliente(Fila* f, Cliente* C);
 Cliente* TiraCliente(Fila *f);
 int FVazia(Fila* f);

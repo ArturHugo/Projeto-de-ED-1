@@ -9,7 +9,9 @@ int main(int argc, char *argv[]){
         exit(1);
     }
 
-    LeDados(argv[1]);
+    Fila* f = LeDados(argv[1]);
+
+    FreeFila(f);
 
     return 0;
 }
