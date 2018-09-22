@@ -29,6 +29,7 @@ typedef struct Pessoa{
 
 typedef struct InformacaoGlobal{
     float clientePorTempo;  //Numero de clientes atendidos por unidade de tempo
+    float tempoMedio;       //Tempo medio de espera dos clientes nas filas
 }InfoGlobal;
 
 typedef struct Guiche{
@@ -43,6 +44,7 @@ typedef struct Guiche{
     void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv);        //Coloca dados de clientes com Serviço especifico no arquivo de saida
     void TeladeCriacao();                                                          //Cria interatividade pelo terminal para criação de arquivos de saida
     void GeraGuiches(char* ArquivoSaida, int quantidade);                          //Adiciona no arquivo de Saida numeros dos guichês aleatoriamente
+    void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes);  //Cria o relatorio com as informações gerais do programa
 /* Fim das funções de entrada e saida */
 
 Fila* CriaFilaVazia();

@@ -195,3 +195,28 @@ void TeladeCriacao(){
     }
 
 }
+/* Cria Arquivo com as informações sobre a saida de dados */
+void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes){
+    FILE* Saida;
+    Saida=fopen(ArquivoSaida,"w");                              //Abrindo para escrita do Relatorio, substituindo o arquivo se ele já existir
+    if(Saida == NULL){                                          //Conferindo se houve a criação
+        printf("Erro na criação do Relatorio, parando...\n");   
+        exit(1);
+    }
+    
+    /* Primeira Linha destinada para informações gerais sobre os clientes */
+    fprintf(Saida,"%.2f %.2f\n", Global.tempoMedio,Global.clientePorTempo);
+
+    Cliente* Dados;                                             //Ponteiro para auxiliar na escritura dos dados
+
+    /* Enquanto a Fila de clientes não estiver Vazia, os elementos dela são 
+    retirados um por um para escrever seus dados coletados */
+    while(!FVazia(Clientes)){
+        Dados=TiraElementoDaFila(Clientes);                     //Tirando elemento da fila para usar seus dados
+
+        fprintf(Saida,"%d %d %d %d\n", Dados->guiche,Dados->prioridade,Dados->tempo_espera,Dados->serv);
+        free(Dados);                                            // Como os clientes não serão mais usados a partir daqui, seus dados são liberados
+    }
+    free(Clientes->Head);
+    free(Clientes);
+}
