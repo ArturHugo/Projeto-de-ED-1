@@ -22,14 +22,8 @@ void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond){
 }
 
 Fila** Separa5Guiches(Fila* Principal){
-    Fila** Separadas;
+    Fila** Separadas=Cria5Filas();
     Guiche* TrocadeFila;
-    Separadas=(Fila**)malloc(5*sizeof(Fila*));
-    Separadas[0]=CriaFilaVazia();
-    Separadas[1]=CriaFilaVazia();
-    Separadas[2]=CriaFilaVazia();
-    Separadas[3]=CriaFilaVazia();
-    Separadas[4]=CriaFilaVazia();
     while(!FVazia(Principal)){
         TrocadeFila=TiraElementoDaFila(Principal);
         switch(TrocadeFila->serv){
@@ -51,4 +45,69 @@ Fila** Separa5Guiches(Fila* Principal){
         }
     }
     return Separadas;
+}
+
+Fila** Cria5Filas(){
+    Fila** Separadas;
+    Separadas=(Fila**)malloc(5*sizeof(Fila*));
+    Separadas[0]=CriaFilaVazia();
+    Separadas[1]=CriaFilaVazia();
+    Separadas[2]=CriaFilaVazia();
+    Separadas[3]=CriaFilaVazia();
+    Separadas[4]=CriaFilaVazia();
+    return Separadas;
+}
+
+void InsereClientePrioridade(Fila* f, Cliente* c){
+    f->tamanho++;
+    Lista* auxF = f->Head;
+    Lista* aInserir=(Lista*)malloc(sizeof(Lista));
+    aInserir->info=c;
+
+    if(auxF==f->Tail){
+        auxF->prox=aInserir;
+        f->Tail=aInserir;
+        return;
+    }
+
+    Cliente* auxC = auxF->prox->info;
+    while( (auxC->tempo_chegada < c->tempo_chegada) ){
+        auxF=auxF->prox;
+        if(auxF==f->Tail){
+            auxF->prox=aInserir;
+            f->Tail=aInserir;
+            return;
+        }
+        auxC = auxF->prox->info;
+    }
+
+    aInserir->prox=auxF->prox;
+    auxF->prox=aInserir;
+}
+
+void InsereClienteTempo(Fila* f, Cliente* c){
+    f->tamanho++;
+    Lista* auxF = f->Head;
+    Lista* aInserir=(Lista*)malloc(sizeof(Lista));
+    aInserir->info=c;
+
+    if(auxF==f->Tail){
+        auxF->prox=aInserir;
+        f->Tail=aInserir;
+        return;
+    }
+
+    Cliente* auxC = auxF->prox->info;
+    while( (auxC->tempo_chegada < c->tempo_chegada) ){
+        auxF=auxF->prox;
+        if(auxF==f->Tail){
+            auxF->prox=aInserir;
+            f->Tail=aInserir;
+            return;
+        }
+        auxC = auxF->prox->info;
+    }
+
+    aInserir->prox=auxF->prox;
+    auxF->prox=aInserir;
 }

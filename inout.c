@@ -30,7 +30,7 @@ Fila* LeDadosClientes(char *Filename){
     while(fscanf(f,"%d %d %d %d", &tempo_chegada, &idade, &serv, &cond) != EOF){
         Novo_Cliente=CriaCliente();
         PassaDados(Novo_Cliente, tempo_chegada, idade, serv, cond);
-        InserirNaFila(ClientesF, Novo_Cliente);
+        InsereClienteTempo(ClientesF, Novo_Cliente);
     }
     return ClientesF;
 }
@@ -98,7 +98,7 @@ void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario){
 
     /* Escrevendo no arquivo de saida dados aleatorios dos cliente */
     for(int contador=0;contador<quantidade;contador++){
-        tempo_chegada=AleatorioRange(horario-5,horario+5);
+        tempo_chegada=AleatorioRange(horario,horario);
         idade=AleatorioRange(0,100);
         serv=AleatorioRange(0,4);
         cond=AleatorioRange(0,2);
@@ -236,8 +236,8 @@ void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes){
     retirados um por um para escrever seus dados coletados */
     while(!FVazia(Clientes)){
         Dados=TiraElementoDaFila(Clientes);                     //Tirando elemento da fila para usar seus dados
-
-        fprintf(Saida,"%d %d %d %d\n", Dados->guiche,Dados->prioridade,Dados->tempo_espera,Dados->serv);
+        Dados->tempo_espera=Dados->tempo_inicio - Dados->tempo_chegada;
+        fprintf(Saida,"%d %d %d %d\n", Dados->guiche,Dados->prioridade, Dados->tempo_espera, Dados->serv);
         free(Dados);                                            // Como os clientes não serão mais usados a partir daqui, seus dados são liberados
     }
     free(Clientes->Head);

@@ -35,6 +35,7 @@ typedef struct InformacaoGlobal{
 typedef struct Guiche{
     int serv;              //Servico do guiche
     int num;               //Numero do guiche
+    int tempoUltimoAtendimento;
 }Guiche;
 /* Funções de entrada e saida de dados */                                    //Retorna um numero aleatorio entre valor minimo e maximo
     Fila* LeDadosClientes(char *Filename);                                                  //Lê os dados dos CLIENTES e retorna uma fila sem organização
@@ -48,6 +49,9 @@ typedef struct Guiche{
     void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes);  //Cria o relatorio com as informações gerais do programa
 /* Fim das funções de entrada e saida */
 
+void InsereClienteTempo(Fila* f, Cliente* c);
+void InsereClientePrioridade(Fila* f, Cliente* c);
+Fila** Cria5Filas();
 Fila** Separa5Guiches(Fila* Principal); //Separa as filas dos guiches
 Fila* CriaFilaVazia();
 void FreeFila(Fila* f);
