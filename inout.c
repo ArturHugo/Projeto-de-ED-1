@@ -219,4 +219,5 @@ void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes){
     }
     free(Clientes->Head);
     free(Clientes);
+    fclose(Saida);
 }
