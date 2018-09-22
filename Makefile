@@ -1,12 +1,18 @@
-all: fila.o inout.o main.o clientes.o
-	gcc -g fila.o inout.o main.o clientes.o
+CompilaObjeto = gcc -g -c
+all: fila.o inout.o main.o clientes.o headers.h
+	gcc -g fila.o inout.o main.o clientes.o -o sim_senhas
+#"make GeraArquivos" Para criar o programa que gera arquivo de saida com Clientes
+GeraArquivos: GeraArquivos.o inout.o clientes.o fila.o headers.h
+	gcc -g GeraArquivos.o inout.o clientes.o fila.o -o Teladeclientes
 fila.o: fila.c
-	gcc -g -c fila.c 
+	$(CompilaObjeto) fila.c 
 inout.o: inout.c
-	gcc -g -c inout.c 
+	$(CompilaObjeto) inout.c 
 main.o: main.c
-	gcc -g -c main.c
+	$(CompilaObjeto) main.c
 clientes.o: clientes.c
-	gcc -g -c clientes.c
+	$(CompilaObjeto) clientes.c
+GeraArquivos.o: GeraArquivos.c
+	$(CompilaObjeto) GeraArquivos.c
 clear:
-	rm inout.o func.o fila.o 
+	rm -f inout.o fila.o GeraArquivos.o main.o clientes.o 
