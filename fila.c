@@ -51,10 +51,8 @@ int FVazia(Fila* f){
 }
 
 void FreeFila(Fila* f){
-    Cliente* aux;
     while(!FVazia(f)){
-        aux = (Cliente*)TiraElementoDaFila(f);
-        free(aux);
+        free(TiraElementoDaFila(f));
     }
     free(f->Head);
     free(f);
