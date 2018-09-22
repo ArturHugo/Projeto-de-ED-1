@@ -38,18 +38,11 @@ typedef struct Guiche{
 /* Funções de entrada e saida de dados */                                    //Retorna um numero aleatorio entre valor minimo e maximo
     Fila* LeDados(char *Filename);                                                  //Lê os dados dos CLIENTES e retorna uma fila sem organização
         /* Cria Arquivos Com Dados de clientes */
-<<<<<<< HEAD
-    void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade);               //Coloca dados de uma quantidade de clientes com caracteristicas aleatorias  
-    void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario);    //Coloca dados de clientes com horario especifico de entrada
-    void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv);        //Coloca dados de clientes com Serviço especifico
-    void TeladeCriacao();
-=======
     void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade);               //Coloca dados de uma quantidade de clientes com caracteristicas aleatorias no arquivo de saida  
     void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario);    //Coloca dados de clientes com horario especifico de entrada no arquivo de saida
     void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv);        //Coloca dados de clientes com Serviço especifico no arquivo de saida
     void TeladeCriacao();                                                          //Cria interatividade pelo terminal para criação de arquivos de saida
     void GeraGuiches(char* ArquivoSaida, int quantidade);                          //Adiciona no arquivo de Saida numeros dos guichês aleatoriamente
->>>>>>> f388a5d66f1ad68f19ce95d93fd8d96392c127ce
 /* Fim das funções de entrada e saida */
 
 Fila* CriaFilaVazia();

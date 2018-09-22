@@ -16,7 +16,6 @@ Fila* CriaFilaVazia(){
 void InserirNaFila(Fila* f, void* elemento){
     f->Tail->prox=(Lista*)malloc(sizeof(Lista));
     f->Tail->prox->info=elemento;
-    f->Tail->prox->info=elemento;
     f->Tail=f->Tail->prox;
     f->tamanho++;
 }
@@ -37,8 +36,8 @@ void* TiraElementoDaFila(Fila* f){
     Lista* aux;
     void* Retorno;
     aux=f->Head;
-    Retorno=f->Head->info;
     f->Head=aux->prox;
+    Retorno=f->Head->info;
     free(aux);
     f->tamanho--;
     return Retorno;
@@ -52,8 +51,10 @@ int FVazia(Fila* f){
 }
 
 void FreeFila(Fila* f){
+    Cliente* aux;
     while(!FVazia(f)){
-        TiraElementoDaFila(f);
+        aux = (Cliente*)TiraElementoDaFila(f);
+        free(aux);
     }
     free(f->Head);
     free(f);
