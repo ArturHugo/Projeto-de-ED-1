@@ -6,7 +6,11 @@ fila.o
 .vscode/
 clientes.o
 a.out
+<<<<<<< HEAD
 saida.txt
 GeraArquivos.o
 Teladeclientes
 Guiche.txt
+=======
+saida.txt
+>>>>>>> teste_fila_geral
