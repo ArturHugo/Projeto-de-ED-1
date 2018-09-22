@@ -48,6 +48,7 @@ typedef struct Guiche{
     void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes);  //Cria o relatorio com as informações gerais do programa
 /* Fim das funções de entrada e saida */
 
+Fila** Separa5Guiches(Fila* Principal); //Separa as filas dos guiches
 Fila* CriaFilaVazia();
 void FreeFila(Fila* f);
 void InsereCliente(Fila* f, Cliente* C);

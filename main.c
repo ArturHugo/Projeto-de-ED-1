@@ -10,7 +10,29 @@ int main(int argc, char *argv[]){
         printf("Por favos dê 3 arquivos para leitura/escrita de dados... \nParando...\n");
         exit(1);
     }
-    Fila* Guiches;
+    /* Leitura de Dados */
+    Fila* Guiches, *Clientes;
     Guiches=LeDadosGuiches(argv[2]);
+    Clientes=LeDadosClientes(argv[1]);
+
+    /* Separação de Variaveis */
+    Fila **GuicheLivre;
+    Fila **GuicheOcupado;
+    Guiche* TrocadeFila;
+    GuicheLivre=Separa5Guiches(Guiches);
+    
+
+
+
+    /* Free Nos dados Alocados */
+    FreeFila(Clientes);
+    FreeFila(GuicheLivre[0]);
+    FreeFila(GuicheLivre[2]);
+    FreeFila(GuicheLivre[3]);
+    FreeFila(GuicheLivre[4]);
+    FreeFila(GuicheLivre[1]);
+    free(GuicheLivre);
+    FreeFila(Guiches);
+
     return 0;
 }
