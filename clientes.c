@@ -111,3 +111,14 @@ void InsereClienteTempo(Fila* f, Cliente* c){
     aInserir->prox=auxF->prox;
     auxF->prox=aInserir;
 }
+
+float CalculaTempodeEsperaMedio(Fila *f){
+    float tempo_medio=0;
+    Cliente* Auxiliar;
+    for(int i=0; i < f->tamanho ;i++){
+        Auxiliar=TiraElementoDaFila(f);
+        tempo_medio+= (Auxiliar->tempo_inicio - Auxiliar->tempo_chegada);
+        InserirNaFila(f,Auxiliar);
+    }
+    return tempo_medio/f->tamanho; 
+}

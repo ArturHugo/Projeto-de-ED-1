@@ -31,7 +31,8 @@ int main(int argc, char *argv[]){
     int tempo=0;
     int tempoServico[5]={5,10,8,7,2};           //Pode ser ajustado pra alocamento dinamico posteriormente;
     Cliente* foiAtendido; Cliente* Pessoa;
-    Guiche* guicheAux;   
+    Guiche* guicheAux;
+    InfoGlobal InformGeral;   
 
     /* Iteração principal é Feita enquanto há alguem na fila de Chegada ou na Fila dos guiches */
     while(!FVazia(ClientesChegando) || !(FVazia(GuicheOcupado[0]) && FVazia(GuicheOcupado[1]) && FVazia(GuicheOcupado[2]) && FVazia(GuicheOcupado[3]) && FVazia(GuicheOcupado[4]))){               
@@ -39,13 +40,13 @@ int main(int argc, char *argv[]){
         /* Tirar todas as pessoas com tempo de chegada igual ao Tempo */
         /* Botar as pessoas que chegaram nas filas dos Guiches respectivos (organizados por prioridade) */
         while(!FVazia(ClientesChegando)){
-            Pessoa=(Cliente*)ClientesChegando->Head->prox->info;                //Pega a informação do primeiro elemento da fila
-            if(Pessoa->tempo_chegada == tempo){                                 //Confere Se ele já chegou
-                Pessoa=TiraElementoDaFila(ClientesChegando);                    //Passa o primeiro elemento para pessoa
-                InsereClientePrioridade(ClientesNaLoja[Pessoa->serv], Pessoa);  //Insere essa pessoa na Fila de Clientes na loja de acordo com o serviço escolhido
+            Pessoa=(Cliente*)ClientesChegando->Head->prox->info;                        //Pega a informação do primeiro elemento da fila
+            if(Pessoa->tempo_chegada == tempo){                                         //Confere Se ele já chegou na clinica, comparando seu tempo de chegada com o tempo atual
+                Pessoa=TiraElementoDaFila(ClientesChegando);                            //Passa o primeiro elemento para pessoa
+                InsereClientePrioridade(ClientesNaLoja[Pessoa->serv], Pessoa);          //Insere essa pessoa na Fila de Clientes na loja de acordo com o serviço escolhido
             }
-            else break;                                                         //Como esse dados estão organizados em ordem crescente de chegada, se o primeiro não tiver
-        }                                                                       //chegado, nenhum atrás dele tbm irá ter chegado e portanto para o iteração
+            else break;                                                                 //Como esse dados estão organizados em ordem crescente de chegada, se o primeiro não tiver
+        }                                                                               //chegado, nenhum atrás dele tbm irá ter chegado e portanto para o iteração
         
 
         /*  Ver se tem guiches disponiveis (um pra cada tipo) para botar as pessoas para serem atendidas */
@@ -85,10 +86,9 @@ int main(int argc, char *argv[]){
 
     /* Usar dados Contidos na Fila de clientes final para tirar informações */
         /* Informações adicionadas com proposito de teste do que foi feito anteriormente */
-    InfoGlobal Glob;                                            
-    Glob.clientePorTempo=10;
-    Glob.tempoMedio=10;
-    EscreveRelatorio( argv[3] ,Glob, ClientesAtendidos);
+    InformGeral.tempoMedio = CalculaTempodeEsperaMedio(ClientesAtendidos);
+    InformGeral.clientePorTempo = tempo/ClientesAtendidos->tamanho;                                            
+    EscreveRelatorio( argv[3] ,InformGeral, ClientesAtendidos);
 
     /* Free Nos dados Alocados */
     //FreeFila(ClientesAtendidos);              //Foi retirado esse free pois a função de escrever relatorio já libera os dados enquanto escreve-os

@@ -49,6 +49,7 @@ typedef struct Guiche{
     void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes);  //Cria o relatorio com as informações gerais do programa
 /* Fim das funções de entrada e saida */
 
+float CalculaTempodeEsperaMedio(Fila *f);
 void InsereClienteTempo(Fila* f, Cliente* c);
 void InsereClientePrioridade(Fila* f, Cliente* c);
 Fila** Cria5Filas();
