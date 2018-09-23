@@ -55,4 +55,7 @@ void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond);
 void InserirNaFila(Fila* f, void* elemento);
 void* TiraElementoDaFila(Fila* f);
 
+void OrdenaPorChegada(Fila* f);
+Lista* MenorTempoChegada(Lista *l);
+void swapLista(Lista *celula1, Lista *celula2);
 #endif

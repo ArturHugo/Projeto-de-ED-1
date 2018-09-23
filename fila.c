@@ -16,6 +16,7 @@ Fila* CriaFilaVazia(){
 void InserirNaFila(Fila* f, void* elemento){
     f->Tail->prox=(Lista*)malloc(sizeof(Lista));
     f->Tail->prox->info=elemento;
+    f->Tail->ant=f->Tail
     f->Tail=f->Tail->prox;
     f->tamanho++;
 }
@@ -52,8 +53,42 @@ int FVazia(Fila* f){
 
 void FreeFila(Fila* f){
     while(!FVazia(f)){
-        free(TiraElementoDaFila(f));
+        TiraElementoDaFila(f);
     }
     free(f->Head);
     free(f);
+}
+
+Lista* MenorTempoChegada(Lista *l){            // Retorna a posicao do cliente com menor tempo
+    Lista *Retorno;                            //de chegada a partir da posicao dada.
+    Lista *auxLista = l;
+    Cliente *auxCliente = (Cliente*)l->info;   
+    int menor_tempo = __INT_MAX__;
+    while(auxLista->prox != NULL){
+       auxCliente = (Cliente*)auxLista->info;
+       if(menor_tempo > auxCliente->tempo_chegada){
+            menor_tempo = auxCliente->tempo_chegada;
+            Retorno = auxLista;
+        }
+        auxLista = auxLista->prox;
+    }   
+    return Retorno;
+}
+
+void swapLista(Lista *celula1, Lista *celula2){
+    Lista *aux = celula1;
+    celula1->ant->prox = celula2;
+    celula2->ant->prox = celula1;
+    celula1->prox = celula2->prox;
+    celula2->prox = aux->prox;
+}
+
+void OrdenaPorChegada(Fila *f){
+    Lista *auxLista, *auxMenor;
+    auxLista = f->Head->prox;
+    while(auxLista->prox != NULL){
+        auxMenor = MenorTempoChegada(auxLista);
+        swapElementosFila(auxLista, auxMenor);
+        auxLista = auxMenor->prox;
+    }
 }
