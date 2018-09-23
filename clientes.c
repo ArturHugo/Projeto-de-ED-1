@@ -71,7 +71,7 @@ void InsereClientePrioridade(Fila* f, Cliente* c){
     }
 
     Cliente* auxC = auxF->prox->info;
-    while( (auxC->tempo_chegada < c->tempo_chegada) ){
+    while( (auxC->prioridade >= c->prioridade) ){
         auxF=auxF->prox;
         if(auxF==f->Tail){
             auxF->prox=aInserir;
