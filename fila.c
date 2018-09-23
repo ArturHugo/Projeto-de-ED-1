@@ -16,7 +16,7 @@ Fila* CriaFilaVazia(){
 void InserirNaFila(Fila* f, void* elemento){
     f->Tail->prox=(Lista*)malloc(sizeof(Lista));
     f->Tail->prox->info=elemento;
-    f->Tail->ant=f->Tail
+    f->Tail->ant=f->Tail;
     f->Tail=f->Tail->prox;
     f->tamanho++;
 }
