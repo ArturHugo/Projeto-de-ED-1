@@ -13,8 +13,8 @@ int main(int argc, char *argv[]){
     }
     /* Leitura de Dados */
     Fila* Guiches, *ClientesChegando;
-    Guiches=LeDadosGuiches(argv[2]);
-    ClientesChegando=LeDadosClientes(argv[1]);
+    Guiches=LeDadosGuiches(argv[2]);            //Cria uma fila Com os dados lidos dos guiches e passa-a para "Guiches"
+    ClientesChegando=LeDadosClientes(argv[1]);  //Cria uma fila com os dados dos clientes Organizando-os por tempo de chegada e passa-a para "ClientesChegando"
 
     /* Criação de Filas auxiliares */
     Fila **GuicheLivre;                         //Fila Dos GUICHES livre
@@ -33,48 +33,49 @@ int main(int argc, char *argv[]){
     Cliente* foiAtendido; Cliente* Pessoa;
     Guiche* guicheAux;   
 
-    /* Iteração principal é Feita enquanto há alguem na fila de Chegada E na Fila dos guiches */
+    /* Iteração principal é Feita enquanto há alguem na fila de Chegada ou na Fila dos guiches */
     while(!FVazia(ClientesChegando) || !(FVazia(GuicheOcupado[0]) && FVazia(GuicheOcupado[1]) && FVazia(GuicheOcupado[2]) && FVazia(GuicheOcupado[3]) && FVazia(GuicheOcupado[4]))){               
         
         /* Tirar todas as pessoas com tempo de chegada igual ao Tempo */
         /* Botar as pessoas que chegaram nas filas dos Guiches respectivos (organizados por prioridade) */
-            /* Falta Criar Filas pra Clientes Com Guiche como base */
         while(!FVazia(ClientesChegando)){
-            Pessoa=(Cliente*)ClientesChegando->Head->prox->info;
-            if(Pessoa->tempo_chegada == tempo){
-                Pessoa=TiraElementoDaFila(ClientesChegando);
-                InsereClientePrioridade(ClientesNaLoja[Pessoa->serv], Pessoa);
+            Pessoa=(Cliente*)ClientesChegando->Head->prox->info;                //Pega a informação do primeiro elemento da fila
+            if(Pessoa->tempo_chegada == tempo){                                 //Confere Se ele já chegou
+                Pessoa=TiraElementoDaFila(ClientesChegando);                    //Passa o primeiro elemento para pessoa
+                InsereClientePrioridade(ClientesNaLoja[Pessoa->serv], Pessoa);  //Insere essa pessoa na Fila de Clientes na loja de acordo com o serviço escolhido
             }
-            else break;
-        }
+            else break;                                                         //Como esse dados estão organizados em ordem crescente de chegada, se o primeiro não tiver
+        }                                                                       //chegado, nenhum atrás dele tbm irá ter chegado e portanto para o iteração
         
 
         /*  Ver se tem guiches disponiveis (um pra cada tipo) para botar as pessoas para serem atendidas */
             /* Lembrar de gravar o tempo em que cada pessoa começou a ser atendida */ 
-        for(int i=0;i<5;i++){
-            while(!FVazia(GuicheOcupado[i])){
-                guicheAux=GuicheOcupado[i]->Head->prox->info;
-                if((guicheAux->tempoUltimoAtendimento + tempoServico[i]) == tempo){
-                    guicheAux = TiraElementoDaFila(GuicheOcupado[i]);
-                    InserirNaFila(GuicheLivre[i], guicheAux);
+        for(int i=0;i<5;i++){                                                           //Para cada tipo de atendimento:
+
+            while(!FVazia(GuicheOcupado[i])){                                           //Se houver algum guiche ocupado
+                guicheAux=GuicheOcupado[i]->Head->prox->info;                           //confere se ele pode ser desocupado
+                if((guicheAux->tempoUltimoAtendimento + tempoServico[i]) == tempo){     //somando o tempo de quando ele começou
+                    guicheAux = TiraElementoDaFila(GuicheOcupado[i]);                   //a atender com o tempo necessario pra atender.
+                    InserirNaFila(GuicheLivre[i], guicheAux);                           //Passa o guiche ocupado para fila de Livres
                 }
-                else break;
-            }
-            while(!FVazia(GuicheLivre[i])){
-                if(!FVazia(ClientesNaLoja[i])){
-                    foiAtendido=TiraElementoDaFila(ClientesNaLoja[i]);
-                    guicheAux = TiraElementoDaFila(GuicheLivre[i]);
+                else break;                                                             //Como o primeiro guiche é obrigatoriamente o mais perto de
+            }                                                                           //terminar o atendimento, há a interrupção da iteração caso nenhum guiche seja removido
 
-                    foiAtendido->tempo_inicio=tempo;
-                    foiAtendido->guiche=guicheAux->num;
-                    guicheAux->tempoUltimoAtendimento=tempo;
+            while(!FVazia(GuicheLivre[i])){                                             //Equanto houver algum Guiche livre 
+                if(!FVazia(ClientesNaLoja[i])){                                         //e se houver Cliente esperando para ser atendido
+                    foiAtendido=TiraElementoDaFila(ClientesNaLoja[i]);                  //Tira uma pessoa da fila de clientes na loja
+                    guicheAux = TiraElementoDaFila(GuicheLivre[i]);                     //Tira um dos guiches livres
 
+                    foiAtendido->tempo_inicio=tempo;                                    //Salva o tempo do incio do atendimento
+                    foiAtendido->guiche=guicheAux->num;                                 //Salva o numero do guiche que a pessoa foi atendida
+                    guicheAux->tempoUltimoAtendimento=tempo;                            //Salva o tempo do inicio do atendimento no guiche para saber quando ele estará disponivel novamente
+                                                                                    
 
-                    InserirNaFila(ClientesAtendidos,foiAtendido);
-                    InserirNaFila(GuicheOcupado[i],guicheAux);
+                    InserirNaFila(ClientesAtendidos,foiAtendido);                       //Passa a pessoa para fila dos já atendidos (Problema: isso foi um pseudoatendido já que ele só deveria poder ir pra Lista de Atendidos depois que passasse o tempo de atendimento)
+                    InserirNaFila(GuicheOcupado[i],guicheAux);                          //Passa o Guiche para fila dos guiches ocupados
                 }
-                else break;
-            }
+                else break;                                                             //Se o primeiro da fila não puder entrar, há a interrupção da iteração 
+            }                                                                        
         }
         /* Tirar as pessoas que acabaram de ser atendidas e passar elas para uma fila exterior */
 
@@ -83,14 +84,14 @@ int main(int argc, char *argv[]){
     }
 
     /* Usar dados Contidos na Fila de clientes final para tirar informações */
-
-    InfoGlobal Glob;
+        /* Informações adicionadas com proposito de teste do que foi feito anteriormente */
+    InfoGlobal Glob;                                            
     Glob.clientePorTempo=10;
     Glob.tempoMedio=10;
     EscreveRelatorio( argv[3] ,Glob, ClientesAtendidos);
 
     /* Free Nos dados Alocados */
-    //FreeFila(ClientesAtendidos);
+    //FreeFila(ClientesAtendidos);              //Foi retirado esse free pois a função de escrever relatorio já libera os dados enquanto escreve-os
     FreeFila(ClientesChegando);
     for(int i=0;i<5;i++){
         FreeFila(ClientesNaLoja[i]);
