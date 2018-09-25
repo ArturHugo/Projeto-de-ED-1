@@ -55,17 +55,17 @@ typedef struct Guiche{
 
 
 /* Funções de Manipulação de Filas */
-Fila** Cria5Filas();                                                                //Aloca um vetor de 5 filas
-Fila** Separa5Guiches(Fila* Principal);                                             //Separa as filas dos guiches
-Fila* CriaFilaVazia();                                                              //Cria uma fila e retorna ponteiro para ela
-void FreeFila(Fila* f);                                                             //Libera os dados da fila e de seus elemento
-void InsereCliente(Fila* f, Cliente* C);                                            //Insere Cliente ma Fila
-void InsereClienteTempo(Fila* f, Cliente* c);                                       //Insere Cliente de acordo com seu tempo de chegada (ordem decrescente)  
-void InsereClientePrioridade(Fila* f, Cliente* c);                                  //Insere Cliente de acordo com sua prioridade (ordem decrescente)
-void InserirNaFila(Fila* f, void* elemento);                                        //Insere elemento no Final da Fila
-void* TiraElementoDaFila(Fila* f);                                                  //Tira elemento qualquer da fila, retornando o ponteiro para ele
-Cliente* TiraCliente(Fila* f);                                                      //Tira primeiro Cliente da Fila retornando ponteiro para Cliente
-int FVazia(Fila* f);                                                                //Retorna 1 caso a Fila esteja vazia e 0 caso contrario
+Fila** CriaFilas();                                                                //Aloca um vetor de 5 filas
+Fila** SeparaGuiches(int numero_guiches, Fila* Principal);                         //Separa as filas dos guiches
+Fila* CriaFilaVazia();                                                             //Cria uma fila e retorna ponteiro para ela
+void FreeFila(Fila* f);                                                            //Libera os dados da fila e de seus elemento
+void InsereCliente(Fila* f, Cliente* C);                                           //Insere Cliente ma Fila
+void InsereClienteTempo(Fila* f, Cliente* c);                                      //Insere Cliente de acordo com seu tempo de chegada (ordem decrescente)  
+void InsereClientePrioridade(Fila* f, Cliente* c);                                 //Insere Cliente de acordo com sua prioridade (ordem decrescente)
+void InserirNaFila(Fila* f, void* elemento);                                       //Insere elemento no Final da Fila
+void* TiraElementoDaFila(Fila* f);                                                 //Tira elemento qualquer da fila, retornando o ponteiro para ele
+Cliente* TiraCliente(Fila* f);                                                     //Tira primeiro Cliente da Fila retornando ponteiro para Cliente
+int FVazia(Fila* f);                                                               //Retorna 1 caso a Fila esteja vazia e 0 caso contrario
 /* Fim das funções de Fila */
 
 /* Funções de Manipulação de Clientes */
