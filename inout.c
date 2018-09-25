@@ -62,18 +62,18 @@ Fila* LeDadosGuiches(char *Filename){
 void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
     FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
-    f=fopen(ArquivoSaida,"a");
+    f=fopen(ArquivoSaida,"w");
     /* Checando se foi feita a abertura corretamente */ 
     if(f==NULL){
         printf("Houve problema na abertura do arquivo para escrita, parando...\n");
         exit(1);
     }
     InicRandom();
-    int tempo_chegada, idade, serv, cond;
+    int tempo_chegada=0, idade, serv, cond;
 
     /* Escrevendo no arquivo de saida dados aleatorios dos cliente */
     for(int contador=0;contador<quantidade;contador++){
-        tempo_chegada=AleatorioRange(0,50);
+        tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada+4);
         idade=AleatorioRange(0,100);
         serv=AleatorioRange(0,4);
         cond=AleatorioRange(0,2);
@@ -112,7 +112,7 @@ void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario){
 void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv){
     FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
-    f=fopen(ArquivoSaida,"a");
+    f=fopen(ArquivoSaida,"w");
     /* Checando se foi feita a abertura corretamente */ 
     if(f==NULL){
         printf("Houve problema na abertura do arquivo para escrita, parando...\n");
