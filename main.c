@@ -64,6 +64,7 @@ int main(int argc, char *argv[]){
             /* Lembrar de gravar o tempo em que cada pessoa começou a ser atendida */ 
         for(int i=0;i<NUMERO_FILAS;i++){                                                //Para cada tipo de atendimento:
             HaGuicheOcupado = 0;
+
             while(!FVazia(GuicheOcupado[i])){                                           //Se houver algum guiche ocupado
                 guicheAux=GuicheOcupado[i]->Head->prox->info;                           //confere se ele pode ser desocupado
                 if((guicheAux->tempoUltimoAtendimento + tempoServico[i]) == tempo){     //somando o tempo de quando ele começou
