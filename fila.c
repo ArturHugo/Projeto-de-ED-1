@@ -58,40 +58,28 @@ void FreeFila(Fila* f){
     free(f);
 }
 
-Fila** Separa5Guiches(Fila* Principal){
-    Fila** Separadas=Cria5Filas();
+Fila** SeparaGuiches(int numero_guiches, Fila* Principal){
+    Fila** Separadas=CriaFilas(numero_guiches);
     Guiche* TrocadeFila;
+    int i;
     while(!FVazia(Principal)){
         TrocadeFila=TiraElementoDaFila(Principal);
-        switch(TrocadeFila->serv){
-            case 0:
-            InserirNaFila(Separadas[0],TrocadeFila);
-            break;
-            case 1:
-            InserirNaFila(Separadas[1],TrocadeFila);
-            break;
-            case 2:
-            InserirNaFila(Separadas[2],TrocadeFila);
-            break;
-            case 3:
-            InserirNaFila(Separadas[3],TrocadeFila);
-            break;
-            case 4:
-            InserirNaFila(Separadas[4],TrocadeFila);
-            break;
+        for(i=0; i<numero_guiches; i++){
+            if(TrocadeFila->serv == i){
+                InserirNaFila(Separadas[i], TrocadeFila);
+            }
         }
     }
     return Separadas;
 }
 
-Fila** Cria5Filas(){
+Fila** CriaFilas(int numero_filas){
     Fila** Separadas;
-    Separadas=(Fila**)malloc(5*sizeof(Fila*));
-    Separadas[0]=CriaFilaVazia();
-    Separadas[1]=CriaFilaVazia();
-    Separadas[2]=CriaFilaVazia();
-    Separadas[3]=CriaFilaVazia();
-    Separadas[4]=CriaFilaVazia();
+    Separadas=(Fila**)malloc(numero_filas*sizeof(Fila*));
+    int i;
+    for(i=0; i<numero_filas; i++){
+        Separadas[i]=CriaFilaVazia();
+    }
     return Separadas;
 }
 

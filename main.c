@@ -3,6 +3,8 @@
 #include <time.h>
 #include "headers.h"
 
+#define NUMERO_FILAS 5
+
 /* Não executar esse programa */
 int main(int argc, char *argv[]){
     /* Para a execução do programa caso os arquivos não tenham sido informados na linha de comando */
@@ -22,20 +24,29 @@ int main(int argc, char *argv[]){
     Fila *ClientesAtendidos;                    //Fila dos Clientes que já foram atendidos
     Fila **ClientesNaLoja;                      //Fila dos CLIENTES para cada tipo de guiche
     Guiche* TrocadeFila;
-    GuicheLivre=Separa5Guiches(Guiches);        //Separa no index n de GuicheLivre os guiches de serviço n 
-    ClientesAtendidos=CriaFilaVazia();          //No inicio da execução não existem Pessoas já atendidas
-    GuicheOcupado=Cria5Filas();                 //No incio da execução as 5 filas dos guiches ocuapdos está vazia
-    ClientesNaLoja=Cria5Filas();                //No inicio da execução as 5 filas dos clientes na loja estão vazias
+    GuicheLivre=SeparaGuiches(NUMERO_FILAS, Guiches);   //Separa no index n de GuicheLivre os guiches de serviço n 
+    ClientesAtendidos=CriaFilaVazia();                  //No inicio da execução não existem Pessoas já atendidas
+    GuicheOcupado=CriaFilas(NUMERO_FILAS);              //No incio da execução as 5 filas dos guiches ocuapdos está vazia
+    ClientesNaLoja=CriaFilas(NUMERO_FILAS);             //No inicio da execução as 5 filas dos clientes na loja estão vazias
     
     /* Variaveis Auxiliares */
     int tempo=0;
-    int tempoServico[5]={5,10,8,7,2};           //Pode ser ajustado pra alocamento dinamico posteriormente;
+    int *tempoServico = (int*)malloc(NUMERO_FILAS*sizeof(int)); //Pode ser ajustado pra alocamento dinamico posteriormente;
+    
+    /*Inicializa os tempos de cada tipo de servico.*/
+    tempoServico[0] = 5;                                //Essa parte nao tem como generalizar como as outras,
+    tempoServico[1] = 10;                               //ja que esses dados nao sao fornecidos na entrada.
+    tempoServico[2] = 8;
+    tempoServico[3] = 7;
+    tempoServico[4] = 2;
+
     Cliente* foiAtendido; Cliente* Pessoa;
     Guiche* guicheAux;
     InfoGlobal InformGeral;   
-
+    int HaGuicheOcupado = 0;                            //Indica se ha guiche ocupado (0 se nao ha e 1 se ha).
+    
     /* Iteração principal é Feita enquanto há alguem na fila de Chegada ou na Fila dos guiches */
-    while(!FVazia(ClientesChegando) || !(FVazia(GuicheOcupado[0]) && FVazia(GuicheOcupado[1]) && FVazia(GuicheOcupado[2]) && FVazia(GuicheOcupado[3]) && FVazia(GuicheOcupado[4]))){               
+    while(!FVazia(ClientesChegando) || HaGuicheOcupado){               
         
         /* Tirar todas as pessoas com tempo de chegada igual ao Tempo */
         /* Botar as pessoas que chegaram nas filas dos Guiches respectivos (organizados por prioridade) */
@@ -51,8 +62,8 @@ int main(int argc, char *argv[]){
 
         /*  Ver se tem guiches disponiveis (um pra cada tipo) para botar as pessoas para serem atendidas */
             /* Lembrar de gravar o tempo em que cada pessoa começou a ser atendida */ 
-        for(int i=0;i<5;i++){                                                           //Para cada tipo de atendimento:
-
+        for(int i=0;i<NUMERO_FILAS;i++){                                                //Para cada tipo de atendimento:
+            HaGuicheOcupado = 0;
             while(!FVazia(GuicheOcupado[i])){                                           //Se houver algum guiche ocupado
                 guicheAux=GuicheOcupado[i]->Head->prox->info;                           //confere se ele pode ser desocupado
                 if((guicheAux->tempoUltimoAtendimento + tempoServico[i]) == tempo){     //somando o tempo de quando ele começou
@@ -82,18 +93,26 @@ int main(int argc, char *argv[]){
 
 
         tempo++;
+
+        /*Verifica se ha guiche ocupado*/
+        for(int i=0; i<NUMERO_FILAS; i++){
+            if(!FVazia(GuicheOcupado[i])){
+                HaGuicheOcupado = 1;
+                break;
+            }
+        }
     }
 
     /* Usar dados Contidos na Fila de clientes final para tirar informações */
         /* Informações adicionadas com proposito de teste do que foi feito anteriormente */
     InformGeral.tempoMedio = CalculaTempodeEsperaMedio(ClientesAtendidos);
-    InformGeral.clientePorTempo = tempo/ClientesAtendidos->tamanho;                                            
+    InformGeral.clientePorTempo = ClientesAtendidos->tamanho/tempo;                                            
     EscreveRelatorio( argv[3] ,InformGeral, ClientesAtendidos);
 
     /* Free Nos dados Alocados */
     //FreeFila(ClientesAtendidos);              //Foi retirado esse free pois a função de escrever relatorio já libera os dados enquanto escreve-os
     FreeFila(ClientesChegando);
-    for(int i=0;i<5;i++){
+    for(int i=0;i<NUMERO_FILAS;i++){
         FreeFila(ClientesNaLoja[i]);
         FreeFila(GuicheLivre[i]);
         FreeFila(GuicheOcupado[i]);
@@ -101,6 +120,7 @@ int main(int argc, char *argv[]){
     free(ClientesNaLoja);
     free(GuicheOcupado);
     free(GuicheLivre);
+    free(tempoServico);
     FreeFila(Guiches);
 
     return 0;
