@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
     
     /* Iteração principal é Feita enquanto há alguem na fila de Chegada ou na Fila dos guiches */
     while(!FVazia(ClientesChegando) || HaGuicheOcupado){               
-        
+        HaGuicheOcupado = 0;
         /* Tirar todas as pessoas com tempo de chegada igual ao Tempo */
         /* Botar as pessoas que chegaram nas filas dos Guiches respectivos (organizados por prioridade) */
         while(!FVazia(ClientesChegando)){
@@ -63,7 +63,6 @@ int main(int argc, char *argv[]){
         /*  Ver se tem guiches disponiveis (um pra cada tipo) para botar as pessoas para serem atendidas */
             /* Lembrar de gravar o tempo em que cada pessoa começou a ser atendida */ 
         for(int i=0;i<NUMERO_FILAS;i++){                                                //Para cada tipo de atendimento:
-            HaGuicheOcupado = 0;
 
             while(!FVazia(GuicheOcupado[i])){                                           //Se houver algum guiche ocupado
                 guicheAux=GuicheOcupado[i]->Head->prox->info;                           //confere se ele pode ser desocupado
