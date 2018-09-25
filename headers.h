@@ -27,6 +27,8 @@ typedef struct Pessoa{
     
     int serv;               //Serviço desejado pelo Cliente
     int guiche;             //Numero do guiche para onde a pessoa foi encaminhada
+
+    int ordem;
 }Cliente;
 
 /* Estrutura de Dados para armazenar informações Gerais do programa */
@@ -60,8 +62,9 @@ Fila** SeparaGuiches(int numero_guiches, Fila* Principal);                      
 Fila* CriaFilaVazia();                                                             //Cria uma fila e retorna ponteiro para ela
 void FreeFila(Fila* f);                                                            //Libera os dados da fila e de seus elemento
 void InsereCliente(Fila* f, Cliente* C);                                           //Insere Cliente ma Fila
-void InsereClienteTempo(Fila* f, Cliente* c);                                      //Insere Cliente de acordo com seu tempo de chegada (ordem decrescente)  
+void InsereClienteTempo(Fila* f, Cliente* c);                                      //Insere Cliente de acordo com seu tempo de chegada (ordem crescente)  
 void InsereClientePrioridade(Fila* f, Cliente* c);                                 //Insere Cliente de acordo com sua prioridade (ordem decrescente)
+void InsereClienteNum(Fila* f, Cliente* c);                                        //Insere Cliente de acordo com sua ordem no arquivo de entrada
 void InserirNaFila(Fila* f, void* elemento);                                       //Insere elemento no Final da Fila
 void* TiraElementoDaFila(Fila* f);                                                 //Tira elemento qualquer da fila, retornando o ponteiro para ele
 Cliente* TiraCliente(Fila* f);                                                     //Tira primeiro Cliente da Fila retornando ponteiro para Cliente
@@ -71,7 +74,7 @@ int FVazia(Fila* f);                                                            
 /* Funções de Manipulação de Clientes */
 float CalculaTempodeEsperaMedio(Fila *f);                                           //Usa os dados da fila de clientes para calcular o tempo medio de espera
 Cliente* CriaCliente();                                                             //Retorna espaço alocado para um Cliente
-void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond);         //Usa dados lidos para adicionar às informações do Cliente
+void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond,int num); //Usa dados lidos para adicionar às informações do Cliente
 /* Fim das Funções de Clientes */
 
 #endif

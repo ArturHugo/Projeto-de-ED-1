@@ -136,3 +136,30 @@ void InsereClienteTempo(Fila* f, Cliente* c){
     aInserir->prox=auxF->prox;
     auxF->prox=aInserir;
 }
+
+void InsereClienteNum(Fila* f, Cliente* c){
+    f->tamanho++;
+    Lista* auxF = f->Head;
+    Lista* aInserir=(Lista*)malloc(sizeof(Lista));
+    aInserir->info=c;
+
+    if(auxF==f->Tail){
+        auxF->prox=aInserir;
+        f->Tail=aInserir;
+        return;
+    }
+
+    Cliente* auxC = auxF->prox->info;
+    while( (auxC->ordem < c->ordem) ){
+        auxF=auxF->prox;
+        if(auxF==f->Tail){
+            auxF->prox=aInserir;
+            f->Tail=aInserir;
+            return;
+        }
+        auxC = auxF->prox->info;
+    }
+
+    aInserir->prox=auxF->prox;
+    auxF->prox=aInserir;
+}

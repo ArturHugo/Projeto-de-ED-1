@@ -27,10 +27,12 @@ Fila* LeDadosClientes(char *Filename){
     int idade;
     int serv;
     int cond;
+    int nume = 1;
     while(fscanf(f,"%d %d %d %d", &tempo_chegada, &idade, &serv, &cond) != EOF){
         Novo_Cliente=CriaCliente();
-        PassaDados(Novo_Cliente, tempo_chegada, idade, serv, cond);
-        InsereClienteTempo(ClientesF, Novo_Cliente);
+        PassaDados(Novo_Cliente, tempo_chegada, idade, serv, cond, nume);
+        InserirNaFila(ClientesF, Novo_Cliente);
+        nume++;
     }
     return ClientesF;
 }

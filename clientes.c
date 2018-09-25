@@ -10,9 +10,10 @@ Cliente* CriaCliente(){
     }
     else return Novo;
 }
-void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond){
+void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond,int num){
     C->tempo_chegada=tempo_chegada;
     C->serv=serv;
+    C->ordem = num;
     C->prioridade=0;
     if(idade<65)C->prioridade+=1;
     else if(idade>65&&idade<80)C->prioridade+=2;
