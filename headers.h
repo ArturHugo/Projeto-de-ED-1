@@ -48,7 +48,7 @@ typedef struct Guiche{
     Fila* LeDadosGuiches(char *Filename);
         /* Cria Arquivos Com Dados de clientes */
     void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade);               //Coloca dados de uma quantidade de clientes com caracteristicas aleatorias no arquivo de saida  
-    void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario);    //Coloca dados de clientes com horario especifico de entrada no arquivo de saida
+    void GeraClientes_Horario(char* ArquivoSaida, int quantidade, float porcentagem);//Coloca dados de clientes com horario especifico de entrada no arquivo de saida
     void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv);        //Coloca dados de clientes com Serviço especifico no arquivo de saida
     void TeladeCriacao();                                                          //Cria interatividade pelo terminal para criação de arquivos de saida
     void GeraGuiches(char* ArquivoSaida, int quantidade);                          //Adiciona no arquivo de Saida numeros dos guichês aleatoriamente

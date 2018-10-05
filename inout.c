@@ -11,7 +11,7 @@ int AleatorioRange(int minimo, int maximo){
 /* Inicializando a Seed Da função random */
 void InicRandom(){
     time_t Tempo_do_computador;
-    srand((unsigned)time(&Tempo_do_computador));
+    srand((unsigned)time(NULL));
 }
 /* Leitura de dados dos Clientes, devolvendo uma fila com os detalhes */
 Fila* LeDadosClientes(char *Filename){
@@ -86,21 +86,30 @@ void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
 }
 
 /* Adiciona na arquivo de saida clientes com horario de entrada fixo e outros dados aleatorios*/
-void GeraClientes_Horario(char* ArquivoSaida, int quantidade, int horario){
+void GeraClientes_Horario(char* ArquivoSaida, int quantidade, float porcentagem){
      FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
-    f=fopen(ArquivoSaida,"a");
+    f=fopen(ArquivoSaida,"w");
     /* Checando se foi feita a abertura corretamente */ 
     if(f==NULL){
         printf("Houve problema na abertura do arquivo para escrita, parando...\n");
         exit(1);
     }
     InicRandom();
-    int tempo_chegada, idade, serv, cond;
-
+    int tempo_chegada=0, idade, serv, cond;
+    int tempo=0;
+    float limite_inferior=porcentagem/2;
+    float troca;
+    float limite_superior=100-porcentagem/2;
+    int pessoamedia = AleatorioRange((quantidade*limite_inferior)/100,(quantidade*limite_superior)/100); 
     /* Escrevendo no arquivo de saida dados aleatorios dos cliente */
     for(int contador=0;contador<quantidade;contador++){
-        tempo_chegada=AleatorioRange(horario,horario);
+        if(contador > pessoamedia-(porcentagem*quantidade)/200 && contador < pessoamedia+(porcentagem*quantidade)/200){
+            tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada);
+        }
+        else{
+            tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada+15);
+        }
         idade=AleatorioRange(0,100);
         serv=AleatorioRange(0,4);
         cond=AleatorioRange(0,2);
@@ -121,11 +130,11 @@ void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv){
         exit(1);
     }
     InicRandom();
-    int tempo_chegada, idade, cond;
+    int tempo_chegada=0, idade, cond;
 
     /* Escrevendo no arquivo de saida dados aleatorios dos cliente */
     for(int contador=0;contador<quantidade;contador++){
-        tempo_chegada=AleatorioRange(0,50);
+        tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada+5);
         idade=AleatorioRange(0,100);
         cond=AleatorioRange(0,2);
         fprintf(f,"%d %d %d %d\n", tempo_chegada,idade,serv,cond);
@@ -136,7 +145,7 @@ void GeraClientes_Guiche(char* ArquivoSaida, int quantidade, int serv){
 
 /* Adiciona no arquivo de Saida numeros dos guichês aleatoriamente */
 void GeraGuiches(char* ArquivoSaida, int quantidade){
-    FILE* f=fopen(ArquivoSaida, "a");
+    FILE* f=fopen(ArquivoSaida, "w");
         if(f==NULL){
         printf("Houve problema na abertura do arquivo para escrita, parando...\n");
         exit(1);
@@ -167,35 +176,36 @@ void TeladeCriacao(){
     char Resposta;
     int Quantidade,Aux;
     int Mudar_modos;
-    while(1){
-        system("clear");
-        printf("\t\t\tAdicione Clientes\n");
-        printf("\t(1)Aleatorio\t\t\t(2)Horario de Pico\n");
-        printf("\t(3)Guiche Mais Utilizado\t(4)Reiniciar Arquivo\n");
-        printf("\t(0)Sair\n");
-        printf("~> ");
-        scanf("%d",&Mudar_modos);
-        if(Mudar_modos==0){
-            break;
-        }
-        if(Mudar_modos==4){
-            Exclui_Arquivo=fopen(clientefile, "w");
-            fclose(Exclui_Arquivo);
-            continue;
-        }
+    float P;
+    system("clear");
+    printf("\t\t\tAdicione Clientes\n");
+    printf("\t(1)Aleatorio\t\t\t(2)Horario de Pico\n");
+    printf("\t(3)Guiche Mais Utilizado\t(4)Reiniciar Arquivo\n");
+    printf("\t(0)Sair\n");
+    printf("~> ");
+    scanf("%d",&Mudar_modos);
+    if(Mudar_modos==0){
+        //break;
+    }
+    if(Mudar_modos==4){
+        Exclui_Arquivo=fopen(clientefile, "w");
+        fclose(Exclui_Arquivo);
+        Mudar_modos=0;
+    }
+    if(Mudar_modos){
         printf("Digite a quantidade: ");
         scanf("%d",&Quantidade);
         if(Mudar_modos==1){
             GeraAleatoriosClientes(clientefile,Quantidade);
         }
         if(Mudar_modos==2){
-            printf("Digite horario de pico: ");
-            scanf("%d",&Aux);
-            while(Aux<0){
+            printf("Digite porcentagem de pessoas no horario de pico: ");
+            scanf("%f",&P);
+            while(P<0||P>100){
                 printf("Digite novamente: ");
-                scanf("%d",&Aux);
+                scanf("%f",&P);
             }
-            GeraClientes_Horario(clientefile, Quantidade, Aux);
+            GeraClientes_Horario(clientefile, Quantidade, P);
         }
         if(Mudar_modos==3){
             printf("Digite o Guiche mais usado: ");
@@ -204,7 +214,7 @@ void TeladeCriacao(){
                 printf("Digite novamente: ");
                 scanf("%d",&Aux);
             }
-            GeraClientes_Horario(clientefile, Quantidade, Aux);
+            GeraClientes_Guiche(clientefile, Quantidade, Aux);
         }
     }
     system("clear");
