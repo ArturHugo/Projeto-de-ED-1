@@ -48,10 +48,12 @@ Fila* LeDadosGuiches(char *Filename){
         exit(1);
     }
     int ServGuiche;
+    int Quantidade;
     int NumeroDoGuiche=1;
     FilaDosGuiches=CriaFilaVazia();
-
-    while(fscanf(Entrada,"%d",&ServGuiche) != EOF){
+    fscanf(Entrada,"%d",&Quantidade);               //Quantidade não será nescessária posteriormente pois o quantidade de guiches estará armazenado no tamanho da fila criada
+    for(int i =0; i< Quantidade;i++){
+        fscanf(Entrada,"%d",&ServGuiche);
         Atendimento=(Guiche*)malloc(sizeof(Guiche));
         Atendimento->serv=ServGuiche;
         Atendimento->num=NumeroDoGuiche;
@@ -156,6 +158,7 @@ void GeraGuiches(char* ArquivoSaida, int quantidade){
         printf("Quantidade inválida, por favor escolha um número inteiro maior que 5:\n~> ");
         scanf("%d",&quantidade);
     }
+    fprintf(f,"%d\n",quantidade);
     quantidade-=5;
     InicRandom();
     /* Primeiro é feita a escrita de 5 guiches, um de cada tipo para haver a garantia de que 
@@ -194,13 +197,13 @@ void TeladeCriacao(){
     }
     if(Mudar_modos){
         printf("Digite a quantidade: ");
-        scanf("%d",&Quantidade);
+        scanf(" %d",&Quantidade);
         if(Mudar_modos==1){
             GeraAleatoriosClientes(clientefile,Quantidade);
         }
         if(Mudar_modos==2){
             printf("Digite porcentagem de pessoas no horario de pico: ");
-            scanf("%f",&P);
+            scanf(" %f",&P);
             while(P<0||P>100){
                 printf("Digite novamente: ");
                 scanf("%f",&P);
@@ -209,7 +212,7 @@ void TeladeCriacao(){
         }
         if(Mudar_modos==3){
             printf("Digite o Guiche mais usado: ");
-            scanf("%d",&Aux);
+            scanf(" %d",&Aux);
             while(Aux>4||Aux<0){
                 printf("Digite novamente: ");
                 scanf("%d",&Aux);
@@ -219,13 +222,11 @@ void TeladeCriacao(){
     }
     system("clear");
     printf("\tDeseja também criar Guiches? (y/n)\n~> ");
-    while(fflush(stdin)!=0);
-    scanf("%c",&Resposta);
-    scanf("%c",&Resposta);
+    scanf(" %c",&Resposta);
     if((int)Resposta==110||(int)Resposta==78)return; //n = 110 , N = 78
     if((int)Resposta==121||(int)Resposta==89){        //y = 121 , Y = 89
         printf("Qual a quantidade de Guiches?\n~> ");
-        scanf("%d",&Quantidade);
+        scanf(" %d",&Quantidade);
         GeraGuiches(guichefile, Quantidade);
     }
 
