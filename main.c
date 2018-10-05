@@ -15,8 +15,8 @@ int main(int argc, char *argv[]){
     }
     /* Leitura de Dados */
     Fila* Guiches, *ClientesChegando;
-    Guiches=LeDadosGuiches(argv[2]);            //Cria uma fila Com os dados lidos dos guiches e passa-a para "Guiches"
-    ClientesChegando=LeDadosClientes(argv[1]);  //Cria uma fila com os dados dos clientes Organizando-os por tempo de chegada e passa-a para "ClientesChegando"
+    Guiches=LeDadosGuiches(argv[1]);            //Cria uma fila Com os dados lidos dos guiches e passa-a para "Guiches"
+    ClientesChegando=LeDadosClientes(argv[2]);  //Cria uma fila com os dados dos clientes Organizando-os por tempo de chegada e passa-a para "ClientesChegando"
 
     /* Criação de Filas auxiliares */
     Fila **GuicheLivre;                         //Fila Dos GUICHES livre
