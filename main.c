@@ -102,11 +102,11 @@ int main(int argc, char *argv[]){
             }
         }
     }
-
+    tempo--;                                    //É retirada uma unidade de tempo pois no fim do programa sempre há um incremento a mais antes da verificação do fim
     /* Usar dados Contidos na Fila de clientes final para tirar informações */
         /* Informações adicionadas com proposito de teste do que foi feito anteriormente */
     InformGeral.tempoMedio = CalculaTempodeEsperaMedio(ClientesAtendidos);
-    InformGeral.clientePorTempo = (float)ClientesAtendidos->tamanho/tempo;                                            
+    InformGeral.clientePorTempo = (float)ClientesAtendidos->tamanho/(tempo);                                            
     EscreveRelatorio( argv[3] ,InformGeral, ClientesAtendidos);
 
     /* Free Nos dados Alocados */

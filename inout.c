@@ -110,7 +110,7 @@ void GeraClientes_Horario(char* ArquivoSaida, int quantidade, float porcentagem)
             tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada);
         }
         else{
-            tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada+15);
+            tempo_chegada=AleatorioRange(tempo_chegada,tempo_chegada+6);
         }
         idade=AleatorioRange(0,100);
         serv=AleatorioRange(0,4);
