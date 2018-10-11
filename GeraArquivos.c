@@ -15,7 +15,7 @@ void InicRandom(){
     srand((unsigned)time(NULL));
 }
 
-/* Adiciona no arquivo de saida dados aleatorios dos clientes */
+/* Cria arquivo de saida com uma "quantidade" de pessoas */
 void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
     FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
@@ -40,7 +40,7 @@ void GeraAleatoriosClientes(char* ArquivoSaida, int quantidade){
     fclose(f);
 }
 
-/* Adiciona na arquivo de saida clientes com horario de entrada fixo e outros dados aleatorios*/
+/* Cria arquivo de saida com uma porcentagem de pessoas dentro de um horário de pico */
 void GeraClientes_Horario(char* ArquivoSaida, int quantidade, float porcentagem){
      FILE* f;
     /* Abrindo arquivo para armazenar os dados dos clientes */ 
