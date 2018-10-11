@@ -24,6 +24,7 @@ Fila* LeDadosClientes(char *Filename){
         InserirNaFila(ClientesF, Novo_Cliente);                                  //Insere o Cliente na fila de retorno
         nume++;                                                                  //Aumenta o contador que representa a ordem das pessoas no arquivo de entrada
     }
+    fclose(f);
     return ClientesF;                                                            //Retorna ponteiro da fila criada
 }
 
@@ -51,11 +52,12 @@ Fila* LeDadosGuiches(char *Filename){
         InserirNaFila(FilaDosGuiches, Atendimento);
         NumeroDoGuiche++;
     }
-
+    fclose(Entrada);
     return FilaDosGuiches;                          //Retorna ponteiro para Fila com guiches como informação armazenada
 }
 
 /* Cria Arquivo com as informações sobre a saida de dados */
+/* Essa função também já desaloca A fila que é passada como parametro */
 void EscreveRelatorio(char* ArquivoSaida, InfoGlobal Global, Fila *Clientes){
     FILE* Saida;
     Saida=fopen(ArquivoSaida,"w");                              //Abrindo para escrita do Relatorio, substituindo o arquivo se ele já existir

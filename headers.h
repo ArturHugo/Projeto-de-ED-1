@@ -76,5 +76,5 @@ float CalculaTempodeEsperaMedio(Fila *f);                                       
 Cliente* CriaCliente();                                                             //Retorna espaço alocado para um Cliente
 void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond,int num); //Usa dados lidos para adicionar às informações do Cliente
 /* Fim das Funções de Clientes */
-
+Fila* Simulador(Fila* ClientesChegando, Fila* Guiches, int *tempo);
 #endif
