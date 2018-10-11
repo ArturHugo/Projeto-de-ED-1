@@ -61,8 +61,6 @@ Fila** CriaFilas();                                                             
 Fila** SeparaGuiches(int numero_guiches, Fila* Principal);                         //Separa as filas dos guiches
 Fila* CriaFilaVazia();                                                             //Cria uma fila e retorna ponteiro para ela
 void FreeFila(Fila* f);                                                            //Libera os dados da fila e de seus elemento
-void InsereCliente(Fila* f, Cliente* C);                                           //Insere Cliente ma Fila
-void InsereClienteTempo(Fila* f, Cliente* c);                                      //Insere Cliente de acordo com seu tempo de chegada (ordem crescente)  
 void InsereClientePrioridade(Fila* f, Cliente* c);                                 //Insere Cliente de acordo com sua prioridade (ordem decrescente)
 void InsereClienteNum(Fila* f, Cliente* c);                                        //Insere Cliente de acordo com sua ordem no arquivo de entrada
 void InserirNaFila(Fila* f, void* elemento);                                       //Insere elemento no Final da Fila

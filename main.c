@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
                     guicheAux->tempoUltimoAtendimento=tempo;                            //Salva o tempo do inicio do atendimento no guiche para saber quando ele estará disponivel novamente
                                                                                     
 
-                    InsereClienteNum(ClientesAtendidos,foiAtendido);                    //Passa a pessoa para fila dos já atendidos (Problema: isso foi um pseudoatendido já que ele só deveria poder ir pra Lista de Atendidos depois que passasse o tempo de atendimento)
+                    InsereClienteNum(ClientesAtendidos,foiAtendido);                    //Passa a pessoa para fila dos já atendidos
                     InserirNaFila(GuicheOcupado[i],guicheAux);                          //Passa o Guiche para fila dos guiches ocupados
                 }
                 else break;                                                             //Se o primeiro da fila não puder entrar, há a interrupção da iteração 

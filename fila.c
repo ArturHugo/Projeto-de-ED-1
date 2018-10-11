@@ -20,18 +20,6 @@ void InserirNaFila(Fila* f, void* elemento){
     f->tamanho++;
 }
 
-/* Insere cliente em fila levando em conta a prioridade */
-
-/*********************/
-void InsereCliente(Fila* f, Cliente* C){
-    f->Tail->prox=(Lista*)malloc(sizeof(Lista));;
-    f->Tail->prox->info=(Cliente*)C;
-    f->Tail=f->Tail->prox;
-    f->tamanho++;
-}
-/********************/
-
-
 void* TiraElementoDaFila(Fila* f){
     Lista* aux;
     void* Retorno;
@@ -97,33 +85,6 @@ void InsereClientePrioridade(Fila* f, Cliente* c){
 
     Cliente* auxC = auxF->prox->info;
     while( (auxC->prioridade >= c->prioridade) ){
-        auxF=auxF->prox;
-        if(auxF==f->Tail){
-            auxF->prox=aInserir;
-            f->Tail=aInserir;
-            return;
-        }
-        auxC = auxF->prox->info;
-    }
-
-    aInserir->prox=auxF->prox;
-    auxF->prox=aInserir;
-}
-
-void InsereClienteTempo(Fila* f, Cliente* c){
-    f->tamanho++;
-    Lista* auxF = f->Head;
-    Lista* aInserir=(Lista*)malloc(sizeof(Lista));
-    aInserir->info=c;
-
-    if(auxF==f->Tail){
-        auxF->prox=aInserir;
-        f->Tail=aInserir;
-        return;
-    }
-
-    Cliente* auxC = auxF->prox->info;
-    while( (auxC->tempo_chegada < c->tempo_chegada) ){
         auxF=auxF->prox;
         if(auxF==f->Tail){
             auxF->prox=aInserir;
