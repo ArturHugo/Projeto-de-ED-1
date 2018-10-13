@@ -14,9 +14,9 @@ typedef struct Fila{
     int tamanho;
 }Fila;
 
-/* Estrutura de Dados Para armazenar informações sobre os clientes da Clinica */
+/* Estrutura de Dados Para armazenar informações sobre os clientes do laboratorio */
 typedef struct Pessoa{
-    int tempo_chegada;      //Tempo de chegada na clinica
+    int tempo_chegada;      //Tempo de chegada no laboratorio
     int tempo_inicio;       //Tempo de inicio do atendimento
     int tempo_espera;       //Tempo de inicio - tempo de chegada    
     
@@ -34,7 +34,7 @@ typedef struct InformacaoGlobal{
     float tempoMedio;       //Tempo medio de espera dos clientes nas filas
 }InfoGlobal;
 
-/* Estrutura de Dados para armazenar informações sobre cada Guiche da Clinica */
+/* Estrutura de Dados para armazenar informações sobre cada Guiche do laboratorio */
 typedef struct Guiche{
     int serv;              //Servico do guiche
     int num;               //Numero do guiche
@@ -62,7 +62,6 @@ void InsereClientePrioridade(Fila* f, Cliente* c);                              
 void InsereClienteNum(Fila* f, Cliente* c);                                        //Insere Cliente de acordo com sua ordem no arquivo de entrada
 void InserirNaFila(Fila* f, void* elemento);                                       //Insere elemento no Final da Fila
 void* TiraElementoDaFila(Fila* f);                                                 //Tira elemento qualquer da fila, retornando o ponteiro para ele
-Cliente* TiraCliente(Fila* f);                                                     //Tira primeiro Cliente da Fila retornando ponteiro para Cliente
 int FVazia(Fila* f);                                                               //Retorna 1 caso a Fila esteja vazia e 0 caso contrario
 /* Fim das funções de Fila */
 
@@ -71,5 +70,5 @@ float CalculaTempodeEsperaMedio(Fila *f);                                       
 Cliente* CriaCliente();                                                             //Retorna espaço alocado para um Cliente
 void PassaDados(Cliente* C,int tempo_chegada,int idade,int serv, int cond,int num); //Usa dados lidos para adicionar às informações do Cliente
 /* Fim das Funções de Clientes */
-
+Fila* Simulador(Fila* ClientesChegando, Fila* Guiches, int *tempo);
 #endif
