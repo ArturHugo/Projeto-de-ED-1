@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
         /* Botar as pessoas que chegaram nas filas dos Guiches respectivos (organizados por prioridade) */
         while(!FVazia(ClientesChegando)){
             Pessoa=(Cliente*)ClientesChegando->Head->prox->info;                        //Pega a informação do primeiro elemento da fila
-            if(Pessoa->tempo_chegada == tempo){                                         //Confere Se ele já chegou na clinica, comparando seu tempo de chegada com o tempo atual
+            if(Pessoa->tempo_chegada == tempo){                                         //Confere Se ele já chegou no laboratorio, comparando seu tempo de chegada com o tempo atual
                 Pessoa=TiraElementoDaFila(ClientesChegando);                            //Passa o primeiro elemento para pessoa
                 InsereClientePrioridade(ClientesNaLoja[Pessoa->serv], Pessoa);          //Insere essa pessoa na Fila de Clientes na loja de acordo com o serviço escolhido
             }

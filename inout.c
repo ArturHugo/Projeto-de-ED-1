@@ -162,7 +162,7 @@ void GeraGuiches(char* ArquivoSaida, int quantidade){
     quantidade-=5;
     InicRandom();
     /* Primeiro é feita a escrita de 5 guiches, um de cada tipo para haver a garantia de que 
-    existe pelo menos um de cada tipo de guiche na clinica */
+    existe pelo menos um de cada tipo de guiche no laboratorio */
     char* Padroes="0\n3\n4\n2\n1\n";
     fprintf(f,"%s", Padroes);
     for(int Contador=0; Contador < quantidade ;Contador++){
